@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.
@@ -20,7 +22,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,11 +32,13 @@
         </activity>
         <activity
             android:name=".Variable_Get_Post.getRecipe"
-            android:label="@string/title_activity_get_recipe" >
+            android:label="@string/title_activity_get_recipe"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Variable_Get_Post.postValue"
-            android:label="@string/title_activity_post_value" >
+            android:label="@string/title_activity_post_value"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".about"
@@ -41,7 +46,8 @@
         </activity>
         <activity
             android:name=".Variable_Get_Post.viewValues"
-            android:label="@string/title_activity_view_values" >
+            android:label="@string/title_activity_view_values"
+            android:screenOrientation="portrait">
         </activity>
 
         <meta-data
@@ -53,11 +59,17 @@
 
         <activity
             android:name=".FieldMapper.MapsActivity"
-            android:label="@string/title_activity_maps" >
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".FieldMapper.Mapper"
-            android:label="@string/title_activity_mapper" >
+            android:label="@string/title_activity_mapper"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".PixelCam.CamActivity"
+            android:label="@string/title_activity_cam"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

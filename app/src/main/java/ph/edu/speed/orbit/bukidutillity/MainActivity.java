@@ -7,9 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import ph.edu.speed.orbit.bukidutillity.FieldMapper.MapsActivity;
+import ph.edu.speed.orbit.bukidutillity.PixelCam.CamActivity;
 import ph.edu.speed.orbit.bukidutillity.Variable_Get_Post.getRecipe;
-import ph.edu.speed.orbit.bukidutillity.Variable_Get_Post.postValue;
-import ph.edu.speed.orbit.bukidutillity.Variable_Get_Post.viewValues;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
@@ -20,15 +19,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         //declare buttons
-        Button get = (Button) findViewById(R.id.btGet);
-        Button post = (Button) findViewById(R.id.btPost);
-        Button view = (Button) findViewById(R.id.btView);
+        Button send = (Button) findViewById(R.id.btsendValues);
+        Button viewMap = (Button) findViewById(R.id.btviewMap);
+        Button viewCam = (Button) findViewById(R.id.btviewCam);
         Button about = (Button) findViewById(R.id.btAbout);
 
         //set onClick buttons
-        get.setOnClickListener(this);
-        post.setOnClickListener(this);
-        view.setOnClickListener(this);
+        send.setOnClickListener(this);
+        viewMap.setOnClickListener(this);
+        viewCam.setOnClickListener(this);
         about.setOnClickListener(this);
     }
 
@@ -38,17 +37,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         switch (v.getId()){
 
-            case R.id.btGet:
+            case R.id.btsendValues:
                 intent = new Intent(this, getRecipe.class);
                 break;
-            case R.id.btPost:
-                intent = new Intent(this, postValue.class);
+            case R.id.btviewMap:
+                intent = new Intent(this, MapsActivity.class);
                 break;
-            case R.id.btView:
-                intent = new Intent(this, viewValues.class);
+            case R.id.btviewCam:
+                intent = new Intent(this, CamActivity.class);
                 break;
             case R.id.btAbout:
-                intent = new Intent(this, MapsActivity.class);
+                intent = new Intent(this, about.class);
                 break;
         }
 
