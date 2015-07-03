@@ -30,9 +30,9 @@ import java.util.ArrayList;
 
 import ph.edu.speed.orbit.bukidutillity.FieldMapper.Mapper;
 import ph.edu.speed.orbit.bukidutillity.MainActivity;
+import ph.edu.speed.orbit.bukidutillity.PixelCam.CamActivity;
 import ph.edu.speed.orbit.bukidutillity.R;
 import ph.edu.speed.orbit.bukidutillity.Util.bukid_json_parser;
-import ph.edu.speed.orbit.bukidutillity.about;
 
 
 public class getRecipe extends ActionBarActivity {
@@ -52,7 +52,7 @@ public class getRecipe extends ActionBarActivity {
 
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(URL+task, new AsyncHttpResponseHandler() {
+        client.get(URL + task, new AsyncHttpResponseHandler() {
 
             @Override
             public void onSuccess(final int statusCode, Header[] headers, byte[] responseBody) {
@@ -85,11 +85,11 @@ public class getRecipe extends ActionBarActivity {
                 pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 response = pref.getString("Recipe", "[]");
 
-                if(response != "[]"){
+                if (response != "[]") {
                     //give response string to the json parser
                     new bukid_json_parser(response);
                     process();
-                }else {
+                } else {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(getRecipe.this);
                     LinearLayout layout = new LinearLayout(getRecipe.this);  //put MainActivity.this or similar
                     layout.setOrientation(LinearLayout.VERTICAL);
@@ -113,12 +113,8 @@ public class getRecipe extends ActionBarActivity {
                 }
 
 
-
-
             }
         });
-
-
     }
 
     private void process() {
@@ -149,20 +145,28 @@ public class getRecipe extends ActionBarActivity {
 
                 switch(jsonArray[position]){
 
-                    /*
+                    case ("Phosphorus"):
+                    case ("Nitrogen"):
                     case ("Potassium"):
-                        Intent c = new Intent(getRecipe.this,about.class);
-                        c.putExtra("getthis", "color");
+                        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                        editor = pref.edit();
+                        editor.putBoolean("GetColor", true);
+                        editor.apply();
+                        Intent c = new Intent(getRecipe.this, CamActivity.class);
                         startActivityForResult(c,1);
+
+                        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                        val = pref.getString("color", "");
+                        assign(position, val);
                         break;
-                        */
+
 
                     case ("GPS"):
                         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                         String str = pref.getString("Coordinates", "[]");
                         if(str == "[]"){
                             Intent g = new Intent(getRecipe.this,Mapper.class);
-                            g.putExtra("getthis","gps");
+                            g.putExtra("getthis", "gps");
                             startActivityForResult(g,1);
                         }else{
                             val = str;
@@ -210,19 +214,14 @@ public class getRecipe extends ActionBarActivity {
                         builder.show();
                         break;
                     }
-
-
-
-
             }
+
 
             private void assign(int position, String val) {
                 value[position] = val; //input value
                 timestamps[position] = System.currentTimeMillis(); //input timestamp
                 var_ID[position] = jsonArray[position];
             }
-
-
         });
 
 
@@ -234,10 +233,11 @@ public class getRecipe extends ActionBarActivity {
                 for (int i = 0; i < jsonArray.length; i++) {
                     JSONObject jsonobj = new JSONObject();
                     try {
-                        jsonobj.put("value", String.valueOf(value[i]));
+                        jsonobj.put("value", value[i]);
                         StringEntity data = new StringEntity(jsonobj.toString());
 
-                        new JsonPoster(data, var_ID[i]);
+                        if (value[i] != null)
+                            new JsonPoster(data, var_ID[i]);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (UnsupportedEncodingException e) {
@@ -246,6 +246,8 @@ public class getRecipe extends ActionBarActivity {
 
 
                 }
+                stat.setText(JsonPoster.Status);
+                stat.setText(JsonPoster.Status);
                 stat.setText(JsonPoster.Status);
 
             }

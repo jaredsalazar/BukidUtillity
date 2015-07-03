@@ -44,17 +44,21 @@ import java.io.InputStream;
  */
 public  class JsonPoster extends Context {
 
-    String Base_URL = "http://bukidutility.appspot.com/api/v1/farm";
     static String Status;
+    String Base_URL = "http://bukidutility.appspot.com/api/v1/farm";
+    String TOKEN = "APPBUKIDV01QQQQ";
+
+    SharedPreferences pref, Cpref;
+    SharedPreferences.Editor editor;
 
 
-    public JsonPoster(StringEntity data,String var_ID) {
+    public JsonPoster(final StringEntity data, final String var_ID) {
 
         String id = "/" + var_ID;
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Content-Type", "application/json;charset=UTF-8");
-        client.addHeader("X-Farm-Token", "dvas213");
+        client.addHeader("X-Farm-Token", TOKEN);
 
         String URL = Base_URL+String.valueOf(id);
 
@@ -62,11 +66,27 @@ public  class JsonPoster extends Context {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Status = "Status: "+ String.valueOf(statusCode)+" Sent";
+
+                //pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                //editor = pref.edit();
+                //editor.putBoolean("Cached",true);
+                //editor.commit();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Status = "Status: "+ String.valueOf(statusCode)+" Not Sent";
+
+                //Cpref = getApplicationContext().getSharedPreferences("Caching", MODE_PRIVATE);
+                //editor = Cpref.edit();
+                //editor.putString(var_ID, String.valueOf(data));
+                //editor.commit();
+
+                //pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                //editor = pref.edit();
+                //editor.putBoolean("Cached",true);
+                //editor.commit();
+
             }
         });
     }
@@ -102,13 +122,13 @@ public  class JsonPoster extends Context {
     }
 
     @Override
-    public void setTheme(int resid) {
-
+    public Resources.Theme getTheme() {
+        return null;
     }
 
     @Override
-    public Resources.Theme getTheme() {
-        return null;
+    public void setTheme(int resid) {
+
     }
 
     @Override
@@ -259,6 +279,16 @@ public  class JsonPoster extends Context {
     }
 
     @Override
+    public void setWallpaper(Bitmap bitmap) throws IOException {
+
+    }
+
+    @Override
+    public void setWallpaper(InputStream data) throws IOException {
+
+    }
+
+    @Override
     public Drawable peekWallpaper() {
         return null;
     }
@@ -271,16 +301,6 @@ public  class JsonPoster extends Context {
     @Override
     public int getWallpaperDesiredMinimumHeight() {
         return 0;
-    }
-
-    @Override
-    public void setWallpaper(Bitmap bitmap) throws IOException {
-
-    }
-
-    @Override
-    public void setWallpaper(InputStream data) throws IOException {
-
     }
 
     @Override
