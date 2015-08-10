@@ -9,16 +9,9 @@ import org.json.JSONObject;
  */
 public class bukid_json_parser {
 
-    static String[] Name;
-    static String[] Var_ID;
-    static Integer Count;
-
-    JSONObject jObject;
-    static JSONArray jArray;
-    static JSONArray jArray2;
-    static String string;
     public static String[] string_ar;
-    static Object obj;
+    static JSONArray jArray;
+    static String string;
     static JSONObject[] variable;
 
     public bukid_json_parser(String response) {

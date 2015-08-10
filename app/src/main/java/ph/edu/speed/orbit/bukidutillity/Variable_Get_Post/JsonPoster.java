@@ -45,7 +45,7 @@ import java.io.InputStream;
 public  class JsonPoster extends Context {
 
     static String Status;
-    String Base_URL = "http://bukidutility.appspot.com/api/v1/farm";
+    String Base_URL = "http://bukidutility.appspot.com/api/v1/farm/0001/variable";
     String TOKEN = "APPBUKIDV01QQQQ";
 
     SharedPreferences pref, Cpref;
@@ -57,8 +57,8 @@ public  class JsonPoster extends Context {
         String id = "/" + var_ID;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Content-Type", "application/json;charset=UTF-8");
-        client.addHeader("X-Farm-Token", TOKEN);
+        //client.addHeader("Content-Type", "application/json;charset=UTF-8");
+        //client.addHeader("X-Farm-Token", TOKEN);
 
         String URL = Base_URL+String.valueOf(id);
 
@@ -279,12 +279,12 @@ public  class JsonPoster extends Context {
     }
 
     @Override
-    public void setWallpaper(Bitmap bitmap) throws IOException {
+    public void setWallpaper(InputStream data) throws IOException {
 
     }
 
     @Override
-    public void setWallpaper(InputStream data) throws IOException {
+    public void setWallpaper(Bitmap bitmap) throws IOException {
 
     }
 

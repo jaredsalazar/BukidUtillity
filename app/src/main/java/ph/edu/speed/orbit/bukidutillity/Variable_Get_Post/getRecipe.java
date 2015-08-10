@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 import ph.edu.speed.orbit.bukidutillity.FieldMapper.Mapper;
 import ph.edu.speed.orbit.bukidutillity.MainActivity;
-import ph.edu.speed.orbit.bukidutillity.PixelCam.CamActivity;
 import ph.edu.speed.orbit.bukidutillity.R;
 import ph.edu.speed.orbit.bukidutillity.Util.bukid_json_parser;
 
@@ -144,7 +143,7 @@ public class getRecipe extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
 
                 switch(jsonArray[position]){
-
+                    /*
                     case ("Phosphorus"):
                     case ("Nitrogen"):
                     case ("Potassium"):
@@ -159,11 +158,11 @@ public class getRecipe extends ActionBarActivity {
                         val = pref.getString("color", "");
                         assign(position, val);
                         break;
-
+                    */
 
                     case ("GPS"):
-                        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                        String str = pref.getString("Coordinates", "[]");
+                        pref = getApplicationContext().getSharedPreferences("MyFarm", MODE_PRIVATE);
+                        String str = pref.getString("feature", "[]");
                         if(str == "[]"){
                             Intent g = new Intent(getRecipe.this,Mapper.class);
                             g.putExtra("getthis", "gps");
@@ -190,7 +189,6 @@ public class getRecipe extends ActionBarActivity {
                         layout.setPadding(10, 0, 10, 0);
 
                         //set character inside
-
                         input.setHint("Old Value: " + value[position]);
 
 
@@ -246,10 +244,8 @@ public class getRecipe extends ActionBarActivity {
 
 
                 }
+                
                 stat.setText(JsonPoster.Status);
-                stat.setText(JsonPoster.Status);
-                stat.setText(JsonPoster.Status);
-
             }
         });
     }
